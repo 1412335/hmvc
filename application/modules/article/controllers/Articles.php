@@ -19,7 +19,7 @@ class Articles extends MY_Controller
         $article = $this->article_model->get_by_id($article_id);
         if( ! $article)
         {
-            redirect(base_url('article'));
+            redirect(base_url('home'));
         }
         else
         {

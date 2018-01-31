@@ -32,7 +32,7 @@ class Categories extends MY_Controller
         }
         else
         {
-            redirect(admin_home_url());
+            redirect(base_url('home'));
         }
     }
 }
