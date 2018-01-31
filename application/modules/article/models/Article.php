@@ -95,4 +95,24 @@ class Article extends MY_Model
         return NULL;
     }
 
+    public function get_related_to_2($article_id, $limit = 5, $term = 'category')
+    {
+        $article = $this->db->get_where($this->table, array($this->key => $article_id))->row_array();
+        if($article)
+        {
+            if($term == 'category')
+            {
+                return $this->get_related_to($article_id, $limit);
+            }
+            elseif ($term == 'tags')
+            {
+                $key = $this->prefix_table.'tags';
+                $terms = explode(",", $article[$key]);
+                $terms = implode(" ", $terms);
+                return $this->match($key, $terms, '', $article_id);
+            }
+        }
+        return NULL;
+    }
+
 }

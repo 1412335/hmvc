@@ -23,7 +23,7 @@ class Articles extends MY_Controller
         }
         else
         {
-            $related_articles = $this->article_model->get_related_to($article_id, 4, 'tags');
+            $related_articles = $this->article_model->get_related_to_2($article_id, 4, 'tags');
             $this->data['related_articles'] = $related_articles;
 
 //            $related_cat_articles = $this->article_model->get_related_to($article_id, 4);

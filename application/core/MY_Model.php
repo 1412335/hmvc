@@ -11,7 +11,7 @@ class MY_Model extends CI_Model
     protected $table = '';
     protected $prefix_table = '';
     protected $key = '';
-    protected $select = '';
+    protected $select = '*';
 
     public function __construct()
     {
@@ -129,6 +129,21 @@ class MY_Model extends CI_Model
             return TRUE;
         }
         return FALSE;
+    }
+
+    public function match($key, $term, $mode = 'BOOLEAN MODE', $except = '')
+    {
+        $modes = array('BOOLEAN', 'NATURAL LANGUAGE');
+        if( ! in_array($mode, $modes))
+        {
+            $mode = $modes[0];
+        }
+        $sql = "SELECT $this->select FROM $this->table WHERE MATCH($key) AGAINST(".$this->db->escape($term)." IN $mode MODE)";
+        if( ! empty($except))
+        {
+            $sql .= " AND $this->key != ".$except;
+        }
+        return $this->db->query($sql)->result_array();
     }
 
 }
