@@ -66,4 +66,7 @@ $route['admin/categories'] = 'category/categories_admin/index';
 $route['categories/(:num)'] = 'category/categories/view/$1';
 
 $route['admin/login'] = 'user/login_admin/index';
+$route['admin/logout'] = 'user/logout_admin/index';
 $route['admin/register'] = 'user/register_admin/index';
+
+$route['admin/auth/fb/callback'] = 'user/login_admin/facebook_callback';

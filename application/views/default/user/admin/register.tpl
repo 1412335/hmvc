@@ -19,10 +19,10 @@
                     {$errors}
                 </div>
             {/if}
-            {*<div class="form-group has-feedback">*}
-            {*<input type="text" class="form-control" name="fullname" placeholder="Full name">*}
-            {*<span class="glyphicon glyphicon-user form-control-feedback"></span>*}
-            {*</div>*}
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" name="name" placeholder="Full name">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="email" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -53,7 +53,7 @@
 
         <div class="social-auth-links text-center">
             <p>- OR -</p>
-            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
+            <a href="{$fb_login_url}" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
                 Facebook</a>
             <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
                 Google+</a>

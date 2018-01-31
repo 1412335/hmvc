@@ -20,6 +20,6 @@ if( ! function_exists('admin_home_url'))
 {
     function admin_home_url()
     {
-        return base_url() . 'admin/category';
+        return base_url() . 'admin/categories';
     }
 }

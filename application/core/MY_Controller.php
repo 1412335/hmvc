@@ -29,9 +29,9 @@ class MY_Controller extends CI_Controller
                         redirect(admin_home_url());
                     }
                 }
-                else if($controller != 'login' && $controller != 'register')
+                else if($controller != 'login' && $controller != 'register' && $controller != 'auth')
                 {
-//                    redirect(admin_url('login'));
+                    redirect(admin_url('login'));
                 }
                 return;
             default:

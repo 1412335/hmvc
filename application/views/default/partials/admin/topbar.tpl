@@ -129,7 +129,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="{site_url('auth/logout')}" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href={$base_url}admin/logout class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>

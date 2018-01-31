@@ -8,8 +8,46 @@
 
 class Register_admin extends MY_Controller
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('facebook');
+        $this->load->library('form_validation');
+
+        $this->load->model('user', 'user_model');
+    }
+
     public function index()
     {
-        $this->parser->parse('admin/register.tpl', $this->data);
+        $this->data['fb_login_url'] = $this->facebook->login();
+
+        $this->form_validation->set_rules('name', 'Full name', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[user.user_email]');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('passconf', 'Password Confirm', 'trim|required|matches[password]');
+        $this->form_validation->set_rules('cb', 'Terms', 'required');
+
+        if($this->form_validation->run() == false)
+        {
+            $this->data['errors'] = validation_errors();
+            $this->parser->parse('admin/register.tpl', $this->data);
+        }
+        else
+        {
+            if(($user = $this->user_model->register($this->input->post('name'), $this->input->post('email'), $this->input->post('password'))) != false)
+            {
+                $this->session->set_userdata('user', $user);
+                $this->session->set_flashdata('msg', 'Register successfully.');
+                redirect(admin_home_url());
+            }
+            else
+            {
+                $this->data['errors'] = 'Register failed.';
+                $this->parser->parse('admin/register.tpl', $this->data);
+            }
+        }
     }
+
+
 }
