@@ -131,7 +131,7 @@ class MY_Model extends CI_Model
         return FALSE;
     }
 
-    public function match($key, $term, $mode = 'BOOLEAN MODE', $except = '')
+    public function match($key, $term, $mode = 'BOOLEAN MODE', $except = '', $limit = 5)
     {
         $modes = array('BOOLEAN', 'NATURAL LANGUAGE');
         if( ! in_array($mode, $modes))
@@ -142,6 +142,10 @@ class MY_Model extends CI_Model
         if( ! empty($except))
         {
             $sql .= " AND $this->key != ".$except;
+        }
+        if( ! empty($limit))
+        {
+            $sql .= " LIMIT $limit";
         }
         return $this->db->query($sql)->result_array();
     }

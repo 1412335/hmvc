@@ -109,10 +109,37 @@ class Article extends MY_Model
                 $key = $this->prefix_table.'tags';
                 $terms = explode(",", $article[$key]);
                 $terms = implode(" ", $terms);
-                return $this->match($key, $terms, '', $article_id);
+                return $this->match($key, $terms, '', $article_id, $limit);
             }
         }
         return NULL;
+    }
+
+    public function get_related_to_3($article_id, $limit = 5)
+    {
+        $article = $this->db->get_where($this->table, array($this->key => $article_id))->row_array();
+        $array = array(
+            $this->prefix_table.'name',
+            $this->prefix_table.'content',
+            $this->prefix_table.'des',
+            $this->prefix_table.'tags'
+        );
+        $keys = implode(",", $array);
+        $terms = '';
+        foreach ($array as $key)
+        {
+            if(strpos($key, 'tags'))
+            {
+                $tags = explode(",", $article[$key]);
+                $terms .= implode(" ", $tags) . " ";
+            }
+            else
+            {
+                $terms .= $article[$key] . " ";
+            }
+        }
+        var_dump($terms);
+        return $this->match($keys, $terms, 'NATURAL LANGUAGE', $article_id, $limit);
     }
 
 }
