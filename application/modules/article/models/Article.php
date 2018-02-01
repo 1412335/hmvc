@@ -138,7 +138,7 @@ class Article extends MY_Model
                 $terms .= $article[$key] . " ";
             }
         }
-        var_dump($terms);
+//        var_dump($terms);
         return $this->match($keys, $terms, 'NATURAL LANGUAGE', $article_id, $limit);
     }
 
