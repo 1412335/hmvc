@@ -13,9 +13,9 @@
  * @version   3.0
  */
 
-require_once APPPATH."third_party/Smarty/Smarty.class.php";
+require APPPATH . "third_party/Smarty/Smarty.class.php";
 
-class CI_Smarty extends Smarty {
+class MY_Smarty extends Smarty {
 
     public $template_ext = '.php';
 
