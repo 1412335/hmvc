@@ -33,9 +33,9 @@ class MY_Controller extends CI_Controller
                 {
                     redirect(admin_url('login'));
                 }
-                return;
+                break;
             default:
-                return;
+                break;
         }
     }
 

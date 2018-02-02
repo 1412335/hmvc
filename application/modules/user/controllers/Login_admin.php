@@ -59,6 +59,7 @@ class Login_admin extends MY_Controller
         if($this->user_model->login_social($user))
         {
             $this->session->set_userdata('user', $user);
+            $this->session->set_flashdata('msg', 'Login successfully.');
             redirect(admin_home_url());
         }
         else

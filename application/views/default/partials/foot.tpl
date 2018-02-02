@@ -1,4 +1,4 @@
-<footer class="main-footer" style="margin-left: 0px; position: absolute; bottom: 0px; width: 100%;">
+<footer class="main-footer" style="margin-left: 0px; width: 100%;">
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>

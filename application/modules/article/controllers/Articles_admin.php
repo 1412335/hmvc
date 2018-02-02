@@ -77,7 +77,7 @@ class Articles_admin extends MY_Controller
     {
         $this->form_validation->set_rules('article_name', 'Article Name', 'trim|required|min_length[5]');
         $this->form_validation->set_rules('article_cat_id', 'Article Category', 'required');
-        $this->form_validation->set_rules('article_tags', 'Article Tags', 'regex_match["/.+,?/"]');
+        $this->form_validation->set_rules('article_tags', 'Article Tags', 'regex_match[/.+,?/]');
         $this->form_validation->set_rules('article_status', 'Article Status', 'required');
         $this->form_validation->set_rules('article_des', 'Article Description', 'required');
         $this->form_validation->set_rules('article_content', 'Article Content', 'required');
@@ -102,20 +102,20 @@ class Articles_admin extends MY_Controller
                     'article_des' => $_POST['article_des'],
                     'article_content' => $_POST['article_content'],
                     'article_cat_id' => $_POST['article_cat_id'],
-                    'article_cat_status' => $_POST['article_cat_status'],
-                    'article_cat_tags' => $_POST['article_cat_tags'],
+                    'article_status' => $_POST['article_status'],
+                    'article_tags' => $_POST['article_tags'],
                     'article_thumbnail' => $file_data['file_name'],
                 );
                 $this->article_model->insert($new_article);
                 $this->session->set_flashdata('msg', 'Added new article successfully.');
-                redirect(admin_url('article'));
+                redirect(admin_url('articles'));
             }
         }
     }
 
     public function edit($article_id = '')
     {
-        $article = $this->article_model->get_article_by_id($article_id);
+        $article = $this->article_model->get_by_id($article_id);
         if(empty($article))
         {
             redirect(admin_url('article'));
@@ -126,7 +126,7 @@ class Articles_admin extends MY_Controller
 
             $this->form_validation->set_rules('article_name', 'Article Name', 'trim|required|min_length[5]');
             $this->form_validation->set_rules('article_cat_id', 'Article Category', 'required');
-            $this->form_validation->set_rules('article_tags', 'Article Tags', 'regex_match["/.+,?/"]');
+            $this->form_validation->set_rules('article_tags', 'Article Tags', 'regex_match[/.+,?/]');
             $this->form_validation->set_rules('article_status', 'Article Status', 'required');
             $this->form_validation->set_rules('article_des', 'Article Description', 'required');
             $this->form_validation->set_rules('article_content', 'Article Content', 'required');
@@ -143,8 +143,8 @@ class Articles_admin extends MY_Controller
                     'article_cat_id' => $_POST['article_cat_id'],
                     'article_des' => $_POST['article_des'],
                     'article_content' => $_POST['article_content'],
-                    'article_cat_status' => $_POST['article_cat_status'],
-                    'article_cat_tags' => $_POST['article_cat_tags'],
+                    'article_status' => $_POST['article_status'],
+                    'article_tags' => $_POST['article_tags'],
                 );
                 if(isset($_FILES['article_image']) && ($_FILES['article_image']['size'] > 0))
                 {
@@ -163,7 +163,7 @@ class Articles_admin extends MY_Controller
                 }
                 $this->article_model->update($article_id, $update);
                 $this->session->set_flashdata('msg', "Updated article successfully.");
-                redirect(admin_url('article'));
+                redirect(admin_url('articles'));
             }
         }
     }
@@ -172,7 +172,7 @@ class Articles_admin extends MY_Controller
     {
         $this->article_model->delete($article_id);
         $this->session->set_flashdata('msg', "Deleted article successfully.");
-        redirect(admin_url('article'));
+        redirect(admin_url('articles'));
     }
 
     public function related($article_id = '')
