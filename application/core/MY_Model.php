@@ -150,4 +150,9 @@ class MY_Model extends CI_Model
         return $this->db->query($sql)->result_array();
     }
 
+    public function count_all()
+    {
+        return $this->db->get($this->table)->num_rows();
+    }
+
 }

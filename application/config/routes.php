@@ -72,4 +72,4 @@ $route['admin/register'] = 'user/register_admin/index';
 $route['admin/auth/fb/callback'] = 'user/login_admin/facebook_callback';
 $route['admin/auth/gg/callback'] = 'user/login_admin/google_callback';
 
-$route['home'] = 'home/index';
+$route['home/(:num)'] = 'home/index/$1';

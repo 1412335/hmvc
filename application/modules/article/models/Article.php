@@ -62,14 +62,14 @@ class Article extends MY_Model
         {
             if($term == 'category')
             {
-                $this->db->where('article_cat_id', $article['article_cat_id']);
+                $this->db->where('article_cat_id', $article[$this->prefix_table.'cat_id']);
                 $this->db->where('article_id != ', $article_id);
                 return $this->db->get($this->table, $limit)->result_array();
             }
             elseif ($term == 'tags')
             {
                 $return = array();
-                $this->_get_all_combinations(explode(',', $article['article_tags']), "", $tags);
+                $this->_get_all_combinations(explode(',', $article[$this->prefix_table.'tags']), "", $tags);
                 usort($tags, function ($a, $b) {
                     return strlen($a) >= strlen($b);
                 });
@@ -118,28 +118,31 @@ class Article extends MY_Model
     public function get_related_to_3($article_id, $limit = 5)
     {
         $article = $this->db->get_where($this->table, array($this->key => $article_id))->row_array();
-        $array = array(
-            $this->prefix_table.'name',
-            $this->prefix_table.'content',
-            $this->prefix_table.'des',
-            $this->prefix_table.'tags'
-        );
-        $keys = implode(",", $array);
-        $terms = '';
-        foreach ($array as $key)
+        if($article)
         {
-            if(strpos($key, 'tags'))
+            $array = array(
+                $this->prefix_table.'name',
+                $this->prefix_table.'content',
+                $this->prefix_table.'des',
+                $this->prefix_table.'tags'
+            );
+            $keys = implode(",", $array);
+            $terms = '';
+            foreach ($array as $key)
             {
-                $tags = explode(",", $article[$key]);
-                $terms .= implode(" ", $tags) . " ";
+                if(strpos($key, 'tags'))
+                {
+                    $tags = explode(",", $article[$key]);
+                    $terms .= implode(" ", $tags) . " ";
+                }
+                else
+                {
+                    $terms .= $article[$key] . " ";
+                }
             }
-            else
-            {
-                $terms .= $article[$key] . " ";
-            }
+            return $this->match($keys, $terms, 'NATURAL LANGUAGE', $article_id, $limit);
         }
-//        var_dump($terms);
-        return $this->match($keys, $terms, 'NATURAL LANGUAGE', $article_id, $limit);
+        return NULL;
     }
 
 }
