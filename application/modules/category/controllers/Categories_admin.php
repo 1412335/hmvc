@@ -21,13 +21,9 @@ class Categories_admin extends MY_Controller
         $this->load->model('category', 'category_model');
         $this->load->library('form_validation');
 
-        $config = array(
-            'max_size'	=> '100',
-            'max_width'	=> '1024',
-            'max_height'	=> '1024',
-            'allowed_types'	=> 'png|jpg|jpeg',
-            'upload_path'	=> './uploads/categories/',
-        );
+        $this->load->config('upload');
+        $config = $this->config->item('setting');
+        $config['upload_path'] .= 'categories';
         $this->load->library('upload', $config);
 
         $this->cats = $this->category_model->get_list_cats();
@@ -74,8 +70,8 @@ class Categories_admin extends MY_Controller
                 $html .= "<tr id=$item[cat_id]>
 							<td>$i</td>
 							<td>$item[cat_id]</td>
-							<td>{$str}<a href=".base_url()."categories/$item[cat_id]>$item[cat_name]</a></td>
-							<td><a href=".base_url()."categories/$item[cat_parent_id]>$item[cat_parent_name]</a></td>
+							<td>{$str}<a href=".base_url()."categories/$item[cat_id] target='_blank'>$item[cat_name]</a></td>
+							<td><a href=".base_url()."categories/$item[cat_parent_id] target='_blank'>$item[cat_parent_name]</a></td>
 							<td style='max-width: 250px'>$item[cat_des]</td>
 							<td>".$this->cats_status[$item['cat_status']]."</td>
 							<td>$item[cat_created_date]</td>

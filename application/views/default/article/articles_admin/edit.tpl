@@ -59,7 +59,8 @@
 								<label for="article_content">Content</label>
 								<textarea id="article_content" name="article_content" rows="10" cols="80">{$article.article_content}</textarea>
 							</div>
-							<button type="submit" class="btn btn-primary btn-flat" name="edit">Save</button>
+							<button type="submit" class="btn btn-danger btn-flat" name="edit">Save</button>
+							<a href="{$base_url}articles/{$article.article_id}" target="_blank" role="button" class="btn btn-flat btn-warning pull-right">Preview</a>
 						</form>
 					</div>
 				</div>

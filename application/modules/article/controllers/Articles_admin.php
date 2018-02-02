@@ -24,13 +24,9 @@ class Articles_admin extends MY_Controller
 
         $this->load->library('form_validation');
 
-        $config = array(
-            'max_size'	=> '100',
-            'max_height'	=> '1024',
-            'max_width'	=> '1024',
-            'allowed_types'	=> 'png|jpg|jpeg',
-            'upload_path'	=> './uploads/articles/'
-        );
+        $this->load->config('upload');
+        $config = $this->config->item('setting');
+        $config['upload_path'] .= 'articles';
         $this->load->library('upload', $config);
 
         $cats = $this->category_model->get_many();
@@ -52,8 +48,8 @@ class Articles_admin extends MY_Controller
         foreach ($articles as $item)
         {
             $articles_data_table[] = $item['article_id'];
-            $articles_data_table[] = "<a href=".base_url()."articles/$item[article_id]>$item[article_name]</a>";
-            $articles_data_table[] = "<a href=".base_url()."categories/$item[cat_id]>$item[cat_name]</a>";
+            $articles_data_table[] = "<a href=".base_url()."articles/$item[article_id] target='_blank'>$item[article_name]</a>";
+            $articles_data_table[] = "<a href=".base_url()."categories/$item[cat_id] target='_blank'>$item[cat_name]</a>";
             $articles_data_table[] = $item['article_des'];
             $articles_data_table[] = $this->status[$item['article_status']];
             $articles_data_table[] = $item['article_created_date'];
