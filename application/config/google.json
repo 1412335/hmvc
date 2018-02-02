@@ -1,0 +1,16 @@
+{
+  "web": {
+    "client_id": "269992318086-rhi5gtsqpoku1bjd6dg8fehu872dsn5l.apps.googleusercontent.com",
+    "project_id": "phpproject-1479686823332",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "WbQqmKi-Efk0s7neu8k5i5R2",
+    "redirect_uris": [
+      "http://localhost/hmvc/admin/auth/gg/callback"
+    ],
+    "javascript_origins": [
+      "http://127.0.0.1"
+    ]
+  }
+}

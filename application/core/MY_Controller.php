@@ -24,6 +24,7 @@ class MY_Controller extends CI_Controller
                 $controller = strtolower($this->uri->segment(2));
                 if($this->_is_authenticated())
                 {
+                    $this->data['user'] = $this->session->userdata('user');
                     if($controller == 'login' || $controller == 'register')
                     {
                         redirect(admin_home_url());

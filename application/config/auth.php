@@ -12,3 +12,8 @@ $config['fb.app_id'] = '852984138196039';
 $config['fb.app_secret'] = '36b2eb2bb514ae9659065819cc0de8e5';
 $config['fb.default_graph_version'] = 'v2.10';
 $config['fb.callback_url'] = 'admin/auth/fb/callback';
+
+$config['gg.client_secret'] = APPPATH . 'config/google.json';
+$config['gg.access_type'] = 'offline';
+$config['gg.client_scope'] = array('email', 'profile');
+$config['gg.callback_url'] = 'admin/auth/gg/callback';
