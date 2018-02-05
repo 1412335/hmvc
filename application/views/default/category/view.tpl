@@ -33,7 +33,7 @@
                                             <img src="{$base_url}uploads/articles/{$item.article_thumbnail}" style="width: 64px; height: 64px;">
                                         </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading"><a href="{$base_url}articles/{$item.article_id}">{$item.article_name|capitalize}</a></h4>
+                                            <h4 class="media-heading"><a href="{$base_url}articles/{$item.article_slug}-{$item.article_id}">{$item.article_name|capitalize}</a></h4>
                                             {$item.article_des}
                                         </div>
                                     </div>

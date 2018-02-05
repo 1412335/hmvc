@@ -19,11 +19,15 @@ class MY_Model extends CI_Model
         $this->load->database();
     }
 
-    public function get_by_id($id)
+    public function get_by_id($id, $status = '')
     {
         $where = array(
             $this->key => $id
         );
+        if($status != NULL)
+        {
+            $where[$this->prefix_table.'status'] = $status;
+        }
         return $this->get_one($where);
     }
 
@@ -118,7 +122,7 @@ class MY_Model extends CI_Model
 
     public function delete_rule($where)
     {
-        return $this->db->update($this->table, array($this->prefix_table.'status' => 0), $where);
+        return $this->db->update($this->table, array($this->prefix_table.'status' => UN_PUBLIC_STATUS), $where);
     }
 
     public function check_exist($where)
@@ -131,7 +135,7 @@ class MY_Model extends CI_Model
         return FALSE;
     }
 
-    public function match($key, $term, $mode = 'BOOLEAN MODE', $except = '', $limit = 5)
+    public function match($key, $term, $mode = 'BOOLEAN MODE', $limit = 5, $where = '')
     {
         $modes = array('BOOLEAN', 'NATURAL LANGUAGE');
         if( ! in_array($mode, $modes))
@@ -139,9 +143,17 @@ class MY_Model extends CI_Model
             $mode = $modes[0];
         }
         $sql = "SELECT $this->select FROM $this->table WHERE MATCH($key) AGAINST(".$this->db->escape($term)." IN $mode MODE)";
-        if( ! empty($except))
+        if( ! empty($where) && is_array($where))
         {
-            $sql .= " AND $this->key != ".$except;
+            foreach ($where as $key => $value)
+            {
+                $sql .= " AND $key";
+                if(strpos($key, '=') == FALSE)
+                {
+                    $sql .= '=';
+                }
+                $sql .= $value;
+            }
         }
         if( ! empty($limit))
         {
@@ -150,8 +162,12 @@ class MY_Model extends CI_Model
         return $this->db->query($sql)->result_array();
     }
 
-    public function count_all()
+    public function count_all($status = '')
     {
+        if($status != NULL)
+        {
+            $this->db->where($this->prefix_table.'status', $status);
+        }
         return $this->db->get($this->table)->num_rows();
     }
 

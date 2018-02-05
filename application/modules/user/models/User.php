@@ -42,6 +42,7 @@ class User extends MY_Model
             $new_user = array(
                 $this->prefix_table.'name' => $user['name'],
                 $this->prefix_table.'email' => $user['email'],
+                $this->prefix_table.'avatar' => $user['avatar'],
                 $this->prefix_table.'status' => 2,
             );
             return $this->insert($new_user);

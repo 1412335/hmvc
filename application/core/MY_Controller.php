@@ -9,6 +9,10 @@
 class MY_Controller extends CI_Controller
 {
     protected $data = null;
+    protected $status = array(
+        PUBLIC_STATUS	=> 'unpublic',
+        UN_PUBLIC_STATUS	=> 'public'
+    );
 
     public function __construct()
     {

@@ -17,7 +17,7 @@ class Categories extends MY_Controller
 
     public function view($cat_id = '')
     {
-        if(($cat = $this->category_model->get_by_id($cat_id)) != NULL)
+        if(($cat = $this->category_model->get_by_id($cat_id, PUBLIC_STATUS)) != NULL)
         {
             $this->data['cat'] = $cat;
             if(($cat_parent = $this->category_model->get_by_id($cat['cat_parent_id'])) != NULL)
@@ -25,7 +25,7 @@ class Categories extends MY_Controller
                 $this->data['cat_parent'] = $cat_parent;
             }
 
-            $articles = $this->category_model->get_list_articles($cat_id);
+            $articles = $this->category_model->get_list_articles($cat_id, PUBLIC_STATUS);
             $this->data['articles'] = $articles;
 
             $this->parser->parse('view.tpl', $this->data);

@@ -29,14 +29,14 @@
                 {foreach from=$cat.articles item=article}
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <div class="thumbnail">
-                            <a href="{$base_url}articles/{$article.article_id}">
+                            <a href="{$base_url}articles/{$article.article_slug}-{$article.article_id}">
                                 <img src="{$base_url}uploads/articles/{$article.article_thumbnail}" alt="Article Image">
                             </a>
                             <div class="caption">
                                 <h4>{$article.article_name|capitalize}</h4>
                                 <p>{$article.article_des}</p>
                                 <p>
-                                    <a href="{$base_url}articles/{$article.article_id}">Read more <i class="fa fa-angle-double-right"></i></a>
+                                    <a href="{$base_url}articles/{$article.article_slug}-{$article.article_id}">Read more <i class="fa fa-angle-double-right"></i></a>
                                 </p>
                             </div>
                         </div>

@@ -58,6 +58,7 @@ class Login_admin extends MY_Controller
     {
         $this->facebook->callback();
         $user = $this->facebook->get_user_info();
+        $user['avatar'] = $this->facebook->get_user_picture($user['id']);
         $this->insert_user($user);
     }
 

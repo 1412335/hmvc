@@ -56,12 +56,15 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin/articles/add'] = 'article/articles_admin/add';
 $route['admin/articles/(:num)/edit'] = 'article/articles_admin/edit/$1';
 $route['admin/articles/(:num)/delete'] = 'article/articles_admin/delete/$1';
+$route['admin/articles/(:num)'] = 'article/articles_admin/preview/$1';
 $route['admin/articles'] = 'article/articles_admin/index';
 $route['articles/(:num)'] = 'article/articles/view/$1';
+$route['articles/(:any)-(:num)'] = 'article/articles/view/$2';
 
 $route['admin/categories/add'] = 'category/categories_admin/add';
 $route['admin/categories/(:num)/edit'] = 'category/categories_admin/edit/$1';
 $route['admin/categories/(:num)/delete'] = 'category/categories_admin/delete/$1';
+$route['admin/categories/(:num)'] = 'category/categories_admin/preview/$1';
 $route['admin/categories'] = 'category/categories_admin/index';
 $route['categories/(:num)'] = 'category/categories/view/$1';
 

@@ -16,7 +16,7 @@ class Articles extends MY_Controller
 
     public function view($article_id = '')
     {
-        $article = $this->article_model->get_by_id($article_id);
+        $article = $this->article_model->get_by_id($article_id, PUBLIC_STATUS);
         if( ! $article)
         {
             redirect(base_url('home'));

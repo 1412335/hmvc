@@ -9,10 +9,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Articles_admin extends MY_Controller
 {
-    protected $status = array(
-        0	=> 'unpublic',
-        1	=> 'public'
-    );
 
     public function __construct()
     {
@@ -48,15 +44,15 @@ class Articles_admin extends MY_Controller
         foreach ($articles as $item)
         {
             $articles_data_table[] = $item['article_id'];
-            $articles_data_table[] = "<a href=".base_url()."articles/$item[article_id] target='_blank'>$item[article_name]</a>";
+            $articles_data_table[] = "<a href=".base_url()."articles/$item[article_slug]-$item[article_id] target='_blank'>$item[article_name]</a>";
             $articles_data_table[] = "<a href=".base_url()."categories/$item[cat_id] target='_blank'>$item[cat_name]</a>";
             $articles_data_table[] = $item['article_des'];
             $articles_data_table[] = $this->status[$item['article_status']];
             $articles_data_table[] = $item['article_created_date'];
             $articles_data_table[] = $item['article_modified_date'];
             $articles_data_table[] = "<a href=".base_url()."admin/articles/$item[article_id]/edit role='button' class='btn btn-flat btn-primary btn-sm'><i class='fa fa-edit'></i></a>";
-            $articles_data_table[] = "<a href=".base_url()."admin/articles/$item[article_id]/delete onclick='return confirm(\"Do you want to delete this article?\");'
-										role='button' class='btn btn-flat btn-danger btn-sm'><i class='fa fa-remove'></i></a>";
+            $articles_data_table[] = ($item['article_status'] == PUBLIC_STATUS) ? "<a href=".base_url()."admin/articles/$item[article_id]/delete onclick='return confirm(\"Do you want to delete this article?\");'
+										role='button' class='btn btn-flat btn-danger btn-sm'><i class='fa fa-remove'></i></a>" : '';
         }
         $this->data['articles'] = $articles_data_table;
         $this->data['table_attr'] = 'class="table table-bordered table-striped" id="example1"';
@@ -72,6 +68,7 @@ class Articles_admin extends MY_Controller
     public function add()
     {
         $this->form_validation->set_rules('article_name', 'Article Name', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('article_slug', 'Article Slug', 'trim|required');
         $this->form_validation->set_rules('article_cat_id', 'Article Category', 'required');
         $this->form_validation->set_rules('article_tags', 'Article Tags', 'regex_match[/.+,?/]');
         $this->form_validation->set_rules('article_status', 'Article Status', 'required');
@@ -95,6 +92,7 @@ class Articles_admin extends MY_Controller
                 $file_data = $this->upload->data();
                 $new_article = array(
                     'article_name' => $_POST['article_name'],
+                    'article_slug' => $_POST['article_slug'],
                     'article_des' => $_POST['article_des'],
                     'article_content' => $_POST['article_content'],
                     'article_cat_id' => $_POST['article_cat_id'],
@@ -121,6 +119,7 @@ class Articles_admin extends MY_Controller
             $this->data['article'] = $article;
 
             $this->form_validation->set_rules('article_name', 'Article Name', 'trim|required|min_length[5]');
+            $this->form_validation->set_rules('article_slug', 'Article Slug', 'trim|required');
             $this->form_validation->set_rules('article_cat_id', 'Article Category', 'required');
             $this->form_validation->set_rules('article_tags', 'Article Tags', 'regex_match[/.+,?/]');
             $this->form_validation->set_rules('article_status', 'Article Status', 'required');
@@ -136,6 +135,7 @@ class Articles_admin extends MY_Controller
             {
                 $update = array(
                     'article_name' => $_POST['article_name'],
+                    'article_slug' => $_POST['article_slug'],
                     'article_cat_id' => $_POST['article_cat_id'],
                     'article_des' => $_POST['article_des'],
                     'article_content' => $_POST['article_content'],
@@ -169,6 +169,20 @@ class Articles_admin extends MY_Controller
         $this->article_model->delete($article_id);
         $this->session->set_flashdata('msg', "Deleted article successfully.");
         redirect(admin_url('articles'));
+    }
+
+    public function preview($article_id = '')
+    {
+        $article = $this->article_model->get_by_id($article_id);
+        if( ! $article)
+        {
+            redirect(admin_url('articles'));
+        }
+        else
+        {
+            $this->data['article'] = $article;
+            $this->parser->parse('articles_admin/preview.tpl', $this->data);
+        }
     }
 
     public function related($article_id = '')

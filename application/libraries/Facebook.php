@@ -70,6 +70,7 @@ class Facebook
             try {
                 $response = $this->fb->get('/me?fields=id,name,email', $this->get_access_token());
                 $user = $response->getGraphUser()->asArray();
+                $user['status'] = 2;
                 return $user;
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
                 exit('Error: ' . $e->getCode() . ' with message ' . $e->getMessage());
@@ -78,22 +79,22 @@ class Facebook
         return null;
     }
 
-//    /**
-//     * Get user's profile picture.
-//     */
-//    public function get_profile_pic( $user_id )
-//    {
-//        $this->get_session();
-//        if ( $this->session )
-//        {
-//            $request = ( new FacebookRequest( $this->session, 'GET', '/' . $user_id . '/picture?redirect=false&type=large' ) )->execute();
-//            $pic     = $request->getGraphObject()->asArray();
-//
-//            if ( ! empty( $pic ) && ! $pic['is_silhouette'] ) {
-//                return $pic['url'];
-//            }
-//        }
-//        return false;
-//    }
+    public function get_user_picture($user_id)
+    {
+        if($this->fb)
+        {
+            try {
+                $response = $this->fb->get($user_id . '/picture?redirect=0&type=normal', $this->get_access_token());
+                $pic = $response->getGraphNode()->asArray();
+                if( ! empty($pic) && ! empty($pic['url']))
+                {
+                    return $pic['url'];
+                }
+            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                exit('Error: '.$e->getCode().' with message '.$e->getMessage());
+            }
+        }
+        return null;
+    }
 
 }

@@ -5,7 +5,11 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src={$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg class="img-circle" alt="User Image" />
+                {if $user.status == 2}
+                    <img src={$user.avatar} class="img-circle" alt="User Image" />
+                {else}
+                    <img src={$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg class="img-circle" alt="User Image" />
+                {/if}
             </div>
             <div class="pull-left info">
                 <p>{$user.name}</p>

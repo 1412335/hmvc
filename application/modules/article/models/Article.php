@@ -21,12 +21,17 @@ class Article extends MY_Model
         ));
     }
 
-    public function get_by_id($id)
+    public function get_by_id($id, $status = '')
     {
+        $where = array($this->key => $id);
+        if( ! empty($status))
+        {
+            $where[$this->prefix_table.'status'] = $status;
+        }
         $result = $this->get_join(array(
             'table'	=> 'category',
             'con'	=> 'cat_id = article_cat_id',
-        ), array($this->key => $id));
+        ), $where);
         if(empty($result))
         {
             return NULL;
@@ -109,7 +114,11 @@ class Article extends MY_Model
                 $key = $this->prefix_table.'tags';
                 $terms = explode(",", $article[$key]);
                 $terms = implode(" ", $terms);
-                return $this->match($key, $terms, '', $article_id, $limit);
+                $where = array(
+                    $this->key.'!=' => $article_id,
+                    $this->prefix_table.'status'    => PUBLIC_STATUS
+                );
+                return $this->match($key, $terms, '', $limit, $where);
             }
         }
         return NULL;
@@ -140,7 +149,11 @@ class Article extends MY_Model
                     $terms .= $article[$key] . " ";
                 }
             }
-            return $this->match($keys, $terms, 'NATURAL LANGUAGE', $article_id, $limit);
+            $where = array(
+                $this->key.'!=' => $article_id,
+                $this->prefix_table.'status'    => PUBLIC_STATUS
+            );
+            return $this->match($keys, $terms, 'NATURAL LANGUAGE', $limit, $where);
         }
         return NULL;
     }

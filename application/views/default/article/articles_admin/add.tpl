@@ -23,7 +23,11 @@
 							{/if}
 							<div class="form-group">
 								<label for="article_name">Article Name</label>
-								<input type="text" class="form-control" name="article_name" id="article_name" placeholder="Enter Article Name">
+								<input type="text" class="form-control" name="article_name" onchange="change_to_slug();" id="article_name" placeholder="Enter Article Name">
+							</div>
+							<div class="form-group">
+								<label for="article_slug">Article Slug</label>
+								<input type="text" class="form-control" name="article_slug" id="article_slug" placeholder="Enter Article Slug">
 							</div>
 							<div class="form-group">
 								<label for="article_cat_id">Category</label>
