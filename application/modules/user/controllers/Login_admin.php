@@ -14,6 +14,8 @@ class Login_admin extends MY_Controller
         parent::__construct();
         $this->load->library('facebook');
         $this->load->library('google');
+        $this->load->library('twitter');
+
         $this->load->library('form_validation');
 
         $this->load->model('user', 'user_model');
@@ -27,8 +29,9 @@ class Login_admin extends MY_Controller
         }
         $this->data['fb_login_url'] = $this->facebook->login();
         $this->data['gg_login_url'] = $this->google->login();
+        $this->data['tw_login_url'] = $this->twitter->login();
 
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
 //        $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if($this->form_validation->run() == false)
@@ -67,6 +70,13 @@ class Login_admin extends MY_Controller
         $code = $this->input->get('code');
         $this->google->callback($code);
         $user = $this->google->get_user_info();
+        $this->insert_user($user);
+    }
+
+    public function twitter_callback()
+    {
+        $this->twitter->callback();
+        $user = $this->twitter->get_user_info();
         $this->insert_user($user);
     }
 

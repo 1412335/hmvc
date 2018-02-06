@@ -55,8 +55,9 @@
             <p>- OR -</p>
             <a href="{$fb_login_url}" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
                 Facebook</a>
-            <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
+            <a href="{$gg_login_url}" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
                 Google+</a>
+            <a href="" class="btn btn-block btn-social btn-flat btn-twitter" role="button"><i class="fa fa-twitter"></i> Sign in using Twitter</a>
         </div>
 
         <a href="{$base_url}admin/login" class="text-center">I already have a membership</a>

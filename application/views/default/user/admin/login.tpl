@@ -26,7 +26,7 @@
                 </div>
             {/if}
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" name="email" placeholder="Email">
+                <input type="text" class="form-control" name="email" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -55,6 +55,7 @@
                 Facebook</a>
             <a href="{$gg_login_url}" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
                 Google+</a>
+            <a href="{$tw_login_url}" class="btn btn-block btn-social btn-flat btn-twitter" role="button"><i class="fa fa-twitter"></i> Sign in using Twitter</a>
         </div>
         <!-- /.social-auth-links -->
 

@@ -13,6 +13,7 @@ class Register_admin extends MY_Controller
     {
         parent::__construct();
         $this->load->library('facebook');
+        $this->load->library('google');
         $this->load->library('form_validation');
 
         $this->load->model('user', 'user_model');
@@ -21,6 +22,7 @@ class Register_admin extends MY_Controller
     public function index()
     {
         $this->data['fb_login_url'] = $this->facebook->login();
+        $this->data['gg_login_url'] = $this->google->login();
 
         $this->form_validation->set_rules('name', 'Full name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[user.user_email]');

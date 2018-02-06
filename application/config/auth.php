@@ -17,3 +17,7 @@ $config['gg.client_secret'] = APPPATH . 'config/google.json';
 $config['gg.access_type'] = 'offline';
 $config['gg.client_scope'] = array('email', 'profile');
 $config['gg.callback_url'] = 'admin/auth/gg/callback';
+
+$config['tw.consumer_key'] = '6cQL8dbgNtnYageuGYD05aIY1';
+$config['tw.consumer_secret'] = 'wBDy82rVN8HVMzrSF7518FOpcplVu9AiMqL8W0QOPao5irlrj7';
+$config['tw.callback_url'] = 'admin/auth/tw/callback';
