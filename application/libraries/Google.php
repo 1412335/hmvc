@@ -66,7 +66,6 @@ class Google
         $user['email'] = $google_auth->userinfo->get()->email;
         $user['name'] = $google_auth->userinfo->get()->name;
         $user['avatar'] = $google_auth->userinfo->get()->picture;
-        $user['status'] = 2;
         return $user;
     }
 

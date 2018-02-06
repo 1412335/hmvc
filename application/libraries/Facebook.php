@@ -70,7 +70,6 @@ class Facebook
             try {
                 $response = $this->fb->get('/me?fields=id,name,email', $this->get_access_token());
                 $user = $response->getGraphUser()->asArray();
-                $user['status'] = 2;
                 return $user;
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
                 exit('Error: ' . $e->getCode() . ' with message ' . $e->getMessage());

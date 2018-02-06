@@ -99,23 +99,23 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {if $user.status == 2}
-                                    <img src={$user.avatar} class="user-image" alt="User Image" />
+                                {if $user.user_status == 2}
+                                    <img src={$user.user_avatar} class="user-image" alt="User Image" />
                                 {else}
                                     <img src="{$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                                 {/if}
-                                <span class="hidden-xs">{$user.name}</span>
+                                <span class="hidden-xs">{$user.user_name}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    {if $user.status == 2}
-                                        <img src={$user.avatar} class="img-circle" alt="User Image" />
+                                    {if $user.user_status == 2}
+                                        <img src={$user.user_avatar} class="img-circle" alt="User Image" />
                                     {else}
                                         <img src="{$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
                                     {/if}
                                     <p>
-                                        {$user.name} - Web Developer
+                                        {$user.user_name} - Web Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>

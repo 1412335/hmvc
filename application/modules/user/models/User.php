@@ -21,23 +21,30 @@ class User extends MY_Model
         {
             if($user[$this->prefix_table.'status'] == 2)
             {
-                return $this->return_user($user);
+//                return $this->return_user($user);
+                return $user;
             }
             elseif ($this->verify_password($password, $user[$this->prefix_table.'password']))
             {
-                return $this->return_user($user);
+//                return $this->return_user($user);
+                return $user;
             }
             return false;
         }
         return false;
     }
 
-    public function login_social($user)
+    public function login_social(&$user)
     {
         $where = array(
             $this->prefix_table.'email' => $user['email']
         );
-        if($this->check_exist($where) != true)
+        if(($user_return = $this->get_one($where)) != NULL)
+        {
+            $user = $user_return;
+            return TRUE;
+        }
+        else
         {
             $new_user = array(
                 $this->prefix_table.'name' => $user['name'],
@@ -45,9 +52,9 @@ class User extends MY_Model
                 $this->prefix_table.'avatar' => $user['avatar'],
                 $this->prefix_table.'status' => 2,
             );
+            $user = $new_user;
             return $this->insert($new_user);
         }
-        return true;
     }
 
     public function register($name, $email, $password)
@@ -83,6 +90,8 @@ class User extends MY_Model
         $return = array();
         $return['name'] = $user[$this->prefix_table.'name'];
         $return['email'] = $user[$this->prefix_table.'email'];
+        $return['avatar'] = $user[$this->prefix_table.'avatar'];
+        $return['status'] = $user[$this->prefix_table.'status'];
         return $return;
     }
 

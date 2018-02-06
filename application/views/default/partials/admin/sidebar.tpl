@@ -5,14 +5,14 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                {if $user.status == 2}
-                    <img src={$user.avatar} class="img-circle" alt="User Image" />
+                {if $user.user_status == 2}
+                    <img src={$user.user_avatar} class="img-circle" alt="User Image" />
                 {else}
                     <img src={$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg class="img-circle" alt="User Image" />
                 {/if}
             </div>
             <div class="pull-left info">
-                <p>{$user.name}</p>
+                <p>{$user.user_name}</p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
