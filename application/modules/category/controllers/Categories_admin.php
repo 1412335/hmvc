@@ -140,6 +140,8 @@ class Categories_admin extends MY_Controller
         }
         else
         {
+            $this->data['cat'] = $cat;
+
             $articles = $this->category_model->get_list_articles($cat_id, NULL, NULL, NULL);
             $articles_data_tb = array();
             foreach ($articles as $item)
@@ -164,7 +166,6 @@ class Categories_admin extends MY_Controller
             if($this->form_validation->run() == FALSE)
             {
                 $this->data['errors'] = validation_errors();
-                $this->data['cat'] = $cat;
                 $this->parser->parse('categories_admin/edit.tpl', $this->data);
             }
             else

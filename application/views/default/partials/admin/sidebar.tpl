@@ -7,8 +7,10 @@
             <div class="pull-left image">
                 {if $user.user_status == 2}
                     <img src={$user.user_avatar} class="img-circle" alt="User Image" />
-                {else}
+                {elseif $user.user_avatar == NULL}
                     <img src={$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg class="img-circle" alt="User Image" />
+                {else}
+                    <img src={$base_url}uploads/users/{$user.user_avatar} class="img-circle" alt="User Image" />
                 {/if}
             </div>
             <div class="pull-left info">

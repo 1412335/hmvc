@@ -101,8 +101,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 {if $user.user_status == 2}
                                     <img src={$user.user_avatar} class="user-image" alt="User Image" />
+                                {elseif $user.user_avatar == NULL}
+                                    <img src={$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg class="user-image" alt="User Image" />
                                 {else}
-                                    <img src="{$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                                    <img src={$base_url}uploads/users/{$user.user_avatar} class="user-image" alt="User Image" />
                                 {/if}
                                 <span class="hidden-xs">{$user.user_name}</span>
                             </a>
@@ -111,8 +113,10 @@
                                 <li class="user-header">
                                     {if $user.user_status == 2}
                                         <img src={$user.user_avatar} class="img-circle" alt="User Image" />
+                                    {elseif $user.user_avatar == NULL}
+                                        <img src={$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg class="img-circle" alt="User Image" />
                                     {else}
-                                        <img src="{$base_url}assets/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                                        <img src={$base_url}uploads/users/{$user.user_avatar} class="img-circle" alt="User Image" />
                                     {/if}
                                     <p>
                                         {$user.user_name} - Web Developer

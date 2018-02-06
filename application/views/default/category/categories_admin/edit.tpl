@@ -74,7 +74,11 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="col-md-12">
-						{html_table table_attr=$table_attr td_attr=$td_attr cols="ID,Title,Des,Status,Created,Modified,Edit,Delete" loop=$articles}
+						{if $articles}
+                            {html_table table_attr=$table_attr td_attr=$td_attr cols="ID,Title,Des,Status,Created,Modified,Edit,Delete" loop=$articles}
+                        {else}
+							<p class="text-center">No articles</p>
+						{/if}
 					</div>
 				</div>
 				<!-- /.box-body -->

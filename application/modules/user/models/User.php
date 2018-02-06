@@ -67,10 +67,15 @@ class User extends MY_Model
             $new_user = array(
                 $this->prefix_table.'name' => $name,
                 $this->prefix_table.'email' => $email,
-                $this->prefix_table.'password' => $this->hash_password($password),
+                $this->prefix_table.'avatar' => 'avatar.png',
                 $this->prefix_table.'status' => 1,
             );
-            return $this->insert($new_user);
+            $new_user_return = $new_user;
+            $new_user[$this->prefix_table.'password'] = $this->hash_password($password);
+            if($this->insert($new_user) == true)
+            {
+                return $new_user_return;
+            }
         }
         return false;
     }
