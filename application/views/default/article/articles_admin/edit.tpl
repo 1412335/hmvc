@@ -57,11 +57,11 @@
 							</div>
 							<div class="form-group">
 								<label for="article_des">Description</label>
-								<textarea id="article_des" name="article_des" rows="10" cols="80">{$article.article_des}</textarea>
+								<textarea class="editor" id="article_des" name="article_des" rows="10" cols="80">{$article.article_des}</textarea>
 							</div>
 							<div class="form-group">
 								<label for="article_content">Content</label>
-								<textarea id="article_content" name="article_content" rows="10" cols="80">{$article.article_content}</textarea>
+								<textarea class="editor" id="article_content" name="article_content" rows="30" cols="80">{$article.article_content}</textarea>
 							</div>
 							<button type="submit" class="btn btn-danger btn-flat" name="edit">Save</button>
 							<a href="{$base_url}admin/articles/{$article.article_id}" target="_blank" role="button" class="btn btn-flat btn-warning pull-right">Preview</a>

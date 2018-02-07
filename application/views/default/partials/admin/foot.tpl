@@ -49,26 +49,31 @@
 		<script src="{$base_url}assets/AdminLTE/dist/js/demo.js"></script>
 		<!-- CK Editor -->
 		<script src="{$base_url}assets/AdminLTE/bower_components/ckeditor/ckeditor.js"></script>
+		<!-- CK Finder -->
+		<script src="{$base_url}assets/AdminLTE/bower_components/ckfinder/ckfinder.js"></script>
 
 		<script>
+			var base_url = '{$base_url}';
 			{literal}
 			$(function() {
 				$('#example1').DataTable();
 				$('.select2').select2();
 
-				if($('textarea#article_content').length)
-				{
-					CKEDITOR.replace('article_content');
-					CKEDITOR.replace('article_des');
-				}
-				if($('textarea#cat_des').length)
-				{
-					CKEDITOR.replace('cat_des');
-				}
+				$('textarea.editor').each(function (e) {
+                    var editor = CKEDITOR.replace(this.id, {
+                        filebrowserBrowseUrl : base_url + "assets/AdminLTE/bower_components/ckfinder/ckfinder.html",
+                        filebrowserImageBrowseUrl : base_url + "assets/AdminLTE/bower_components/ckfinder/ckfinder.html?Type=Images",
+                        filebrowserFlashBrowseUrl : base_url + "assets/AdminLTE/bower_components/ckfinder/ckfinder.html?Type=Flash",
+                        filebrowserUploadUrl : base_url + "assets/AdminLTE/bower_components/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files",
+                        filebrowserImageUploadUrl : base_url + "assets/AdminLTE/bower_components/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images",
+                        filebrowserFlashUploadUrl : base_url + "assets/AdminLTE/bower_components/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash",
+                        filebrowserWindowWidth : '800',
+                        filebrowserWindowHeight : '480',
+						height: (this.id.indexOf('content') > 0) ? 800 : 300
+                    });
+                    CKFinder.setupCKEditor(editor, base_url + "assets/AdminLTE/bower_components/ckfinder/");
+                });
 
-				$('img.preview-img').click(function() {
-					$('input[type=file]').trigger('click');
-				});
 			});
 			function change_to_slug()
 			{

@@ -52,11 +52,11 @@
 							</div>
 							<div class="form-group">
 								<label for="article_des">Description</label>
-								<textarea id="article_des" name="article_des" rows="10" cols="80">Short description...</textarea>
+								<textarea class="editor" id="article_des" name="article_des" rows="10" cols="80">Short description...</textarea>
 							</div>
 							<div class="form-group">
 								<label for="article_content">Content</label>
-								<textarea id="article_content" name="article_content" rows="10" cols="80">Content of this article...</textarea>
+								<textarea class="editor" id="article_content" name="article_content" rows="10" cols="80">Content of this article...</textarea>
 							</div>
 							<button type="submit" class="btn btn-primary btn-flat" name="add">Save</button>
 						</form>

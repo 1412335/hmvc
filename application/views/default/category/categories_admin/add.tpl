@@ -46,7 +46,7 @@
 							</div>
 							<div class="form-group">
 								<label for="cat_des">Description</label>
-								<textarea name="cat_des" class="form-control" id="cat_des" cols="30" rows="5" placeholder="Write something about category.."></textarea>
+								<textarea name="cat_des" class="editor" id="cat_des" cols="30" rows="5" placeholder="Write something about category.."></textarea>
 							</div>
 							<button type="submit" class="btn btn-primary btn-flat" name="add">Save</button>
 						</form>

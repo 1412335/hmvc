@@ -51,7 +51,7 @@
 							</div>
 							<div class="form-group">
 								<label for="cat_des">Description</label>
-								<textarea id="cat_des" name="cat_des" rows="10" cols="80">{$cat.cat_des}</textarea>
+								<textarea class="editor" id="cat_des" name="cat_des" rows="10" cols="80">{$cat.cat_des}</textarea>
 							</div>
 							<button type="submit" class="btn btn-primary btn-flat" name="edit">Save</button>
 						</form>
