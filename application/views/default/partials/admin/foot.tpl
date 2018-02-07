@@ -9,9 +9,9 @@
 		</div><!-- ./wrapper -->
 		{*<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>*}
 
-		<!-- jQuery 3 -->
-		<script src="{$base_url}assets/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
-		<!-- jQuery UI 1.11.4 -->
+        <!-- jQuery 3 -->
+        <script src="{$base_url}assets/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
 		<script src="{$base_url}assets/AdminLTE/bower_components/jquery-ui/jquery-ui.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="{$base_url}assets/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -91,8 +91,61 @@
 				str = str.toLowerCase();
 				$('#article_slug').val(str);
 			}
-			{/literal}
-		</script>
+
+            $(document).ready(function () {
+
+                $('#form-slide').on('submit', function (e) {
+                    e.preventDefault();
+                    $('.alert').removeClass('hidden alert-danger').addClass('alert-success').html('Loading...');
+                    var data = new FormData(this);
+                    $.ajax({
+                        url: window.location.href,
+                        type: "POST",
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function (result) {
+                            result = JSON.parse(result);
+                            if(result['error'] === 1)
+                            {
+                                $('.alert').removeClass('hidden alert-success').addClass('alert-danger').html(result['msg']);
+                            }
+                            else
+                            {
+                                $('.alert').removeClass('hidden alert-danger').addClass('alert-success').html(result['msg']);
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            $('.alert').removeClass('hidden alert-success').addClass('alert-danger').html(error);
+                        }
+                    })
+                });
+
+                $('#slide_img').on('change', function () {
+                    if(this.files[0])
+                    {
+                        var file = this.files[0];
+                        var file_type = file.type.split('/')[1];
+                        var allow_types = ['jpeg', 'png', 'jpg'];
+                        if(allow_types.indexOf(file_type) > -1)
+                        {
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $('.alert').addClass('hidden');
+                                $('#slide_img_preview').attr('src', e.target.result);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                        else
+                        {
+                            $('.alert').removeClass('hidden alert-success').addClass('alert-danger').html('File is not a image.');
+                        }
+                    }
+                });
+            });
+            {/literal}
+        </script>
 
 		</body>
 </html>

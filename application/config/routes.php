@@ -68,6 +68,11 @@ $route['admin/categories/(:num)'] = 'category/categories_admin/preview/$1';
 $route['admin/categories'] = 'category/categories_admin/index';
 $route['categories/(:num)'] = 'category/categories/view/$1';
 
+$route['admin/slides/add'] = 'slide/slides_admin/add';
+$route['admin/slides/(:num)/edit'] = 'slide/slides_admin/edit/$1';
+$route['admin/slides/(:num)/delete'] = 'slide/slides_admin/delete/$1';
+$route['admin/slides'] = 'slide/slides_admin/index';
+
 $route['admin/login'] = 'user/login_admin/index';
 $route['admin/logout'] = 'user/logout_admin/index';
 $route['admin/register'] = 'user/register_admin/index';

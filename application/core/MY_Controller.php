@@ -19,6 +19,7 @@ class MY_Controller extends CI_Controller
         parent::__construct();
         $role = strtolower($this->uri->segment(1));
         $this->data['base_url'] = base_url();
+        $this->data['status'] = $this->status;
 
         switch ($role)
         {
