@@ -36,6 +36,25 @@
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
             </div>
             <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="captcha" placeholder="Type captcha">
+                        <div class="input-group-addon">
+                            <i class="fa fa-refresh" onclick="refresh_captcha();"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-6">
+                    <div class="form-group has-feedback">
+                        <div id="captcha">
+                            {$captcha}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
@@ -57,7 +76,7 @@
                 Facebook</a>
             <a href="{$gg_login_url}" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
                 Google+</a>
-            <a href="" class="btn btn-block btn-social btn-flat btn-twitter" role="button"><i class="fa fa-twitter"></i> Sign in using Twitter</a>
+            <a href="{$tw_login_url}" class="btn btn-block btn-social btn-flat btn-twitter"><i class="fa fa-twitter"></i> Sign up using Twitter</a>
         </div>
 
         <a href="{$base_url}admin/login" class="text-center">I already have a membership</a>
@@ -72,6 +91,7 @@
 <!-- iCheck -->
 <script src="{$base_url}assets/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 <script>
+    var base_url = '{$base_url}';
     {literal}
     $(function () {
         $('input').iCheck({
@@ -80,6 +100,18 @@
             increaseArea: '20%' // optional
         });
     });
+    function refresh_captcha() {
+        $.ajax({
+            url: base_url + '/admin/captcha/refresh',
+            type: 'GET',
+            success: function (result) {
+                $('#captcha').html(result);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
     {/literal}
 </script>
 </body>

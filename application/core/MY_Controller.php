@@ -35,7 +35,7 @@ class MY_Controller extends CI_Controller
                         redirect(admin_home_url());
                     }
                 }
-                else if($controller != 'login' && $controller != 'register' && $controller != 'auth')
+                else if($controller != 'login' && $controller != 'register' && $controller != 'auth' && $controller != 'captcha')
                 {
                     redirect(admin_url('login'));
                 }

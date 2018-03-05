@@ -19,6 +19,8 @@ class Login_admin extends MY_Controller
         $this->load->library('form_validation');
 
         $this->load->model('user', 'user_model');
+
+        $this->load->helper('captcha');
     }
 
     public function index()
@@ -33,10 +35,27 @@ class Login_admin extends MY_Controller
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
 //        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('captcha', 'Captcha', 'trim|required|callback_verify_captcha');
 
         if($this->form_validation->run() == false)
         {
             $this->data['errors'] = validation_errors();
+
+            $array = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));
+
+            $vals = array(
+                'img_url' => base_url() . '/uploads/captcha/',
+                'img_path' => APPPATH . '../uploads/captcha/',
+                'img_width' => 145,
+                'img_height' => 34
+            );
+            $captcha = create_captcha($vals);
+            $this->data['captcha'] = $captcha['image'];
+            if($this->session->has_userdata('captcha') && file_exists(APPPATH . '../uploads/captcha/' . $this->session->userdata('captcha')['filename']))
+            {
+                unlink(APPPATH . '../uploads/captcha/' . $this->session->userdata('captcha')['filename']);
+            }
+            $this->session->set_userdata('captcha', $captcha);
 
             $this->parser->parse('admin/login.tpl', $this->data);
         }
@@ -47,6 +66,12 @@ class Login_admin extends MY_Controller
             {
                 $this->session->set_userdata('user', $user);
                 $this->session->set_flashdata('msg', 'Login successfully.');
+                if(file_exists(APPPATH . '../uploads/captcha/' . $this->session->userdata('captcha')['filename']))
+                {
+                    unlink(APPPATH . '../uploads/captcha/' . $this->session->userdata('captcha')['filename']);
+                }
+                $this->session->unset_userdata('captcha');
+
                 redirect(admin_home_url());
             }
             else
@@ -93,6 +118,33 @@ class Login_admin extends MY_Controller
             $this->data['errors'] = 'Login failed. Try again.';
             $this->parser->parse('admin/login.tpl', $this->data);
         }
+    }
+
+    public function verify_captcha($word)
+    {
+        if($this->session->has_userdata('captcha') && $word !== $this->session->userdata('captcha')['word'])
+        {
+            $this->form_validation->set_message('verify_captcha', 'Captcha is not correct.');
+            return false;
+        }
+        return true;
+    }
+
+    public function refresh_captcha()
+    {
+        $vals = array(
+            'img_url' => base_url() . '/uploads/captcha/',
+            'img_path' => APPPATH . '../uploads/captcha/',
+            'img_width' => 145,
+            'img_height' => 34
+        );
+        $captcha = create_captcha($vals);
+        if($this->session->has_userdata('captcha') && file_exists(APPPATH . '../uploads/captcha/' . $this->session->userdata('captcha')['filename']))
+        {
+            unlink(APPPATH . '../uploads/captcha/' . $this->session->userdata('captcha')['filename']);
+        }
+        $this->session->set_userdata('captcha', $captcha);
+        echo $captcha['image'];
     }
 
 }

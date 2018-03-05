@@ -34,6 +34,23 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="captcha" placeholder="Type captcha">
+                        <div class="input-group-addon">
+                            <i class="fa fa-refresh" onclick="refresh_captcha();"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group has-feedback">
+                        <div id="captcha">
+                        {$captcha}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
@@ -73,6 +90,7 @@
 <!-- iCheck -->
 <script src="{$base_url}assets/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 <script>
+    var base_url = '{$base_url}';
     {literal}
     $(function () {
         $('input').iCheck({
@@ -81,6 +99,18 @@
             increaseArea: '20%' // optional
         });
     });
+    function refresh_captcha() {
+        $.ajax({
+            url: base_url + '/admin/captcha/refresh',
+            type: 'GET',
+            success: function (result) {
+                $('#captcha').html(result);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
     {/literal}
 </script>
 </body>

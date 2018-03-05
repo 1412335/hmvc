@@ -81,6 +81,7 @@ $route['admin/auth/fb/callback'] = 'user/login_admin/facebook_callback';
 $route['admin/auth/gg/callback'] = 'user/login_admin/google_callback';
 $route['admin/auth/tw/callback'] = 'user/login_admin/twitter_callback';
 
+$route['admin/captcha/refresh'] = 'user/login_admin/refresh_captcha';
 //$route['admin/(:any)'] = 'user/login_admin';
 
 $route['home/(:num)'] = 'home/index/$1';
