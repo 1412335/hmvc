@@ -137,11 +137,12 @@ class Slides_admin extends MY_Controller
                 else
                 {
                     $update = $_POST;
+                    $root_dir = APPPATH . '../uploads/slides/';
+
                     if(isset($_FILES['slide_img']) && $_FILES['slide_img']['size'] > 0)
                     {
                         $slide_img = $_FILES['slide_img'];
                         $file_extension = substr($slide_img['name'], strrpos($slide_img['name'], '.'));
-                        $root_dir = APPPATH . '../uploads/slides/';
                         $directory = array(
                             $root_dir . date('Y'),
                             $root_dir . date('Y') . '/' . date('m'),
@@ -173,9 +174,10 @@ class Slides_admin extends MY_Controller
                     }
                     if(($result = $this->slide_model->update($slide_id, $update)) == true)
                     {
+                        remove_file_uploaded($root_dir . $slide['slide_path']);
                         echo json_encode(array(
                             'error' => 0,
-                            'msg'   => 'Updated successfully.'
+                            'msg'   => 'Update successfully.'
                         ));
                     }
                     else
