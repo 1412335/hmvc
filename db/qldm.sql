@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+articlecategory-- phpMyAdmin SQL Dump
 -- version 4.2.11
 -- http://www.phpmyadmin.net
 --
@@ -148,7 +148,7 @@ INSERT INTO `user` (`user_id`, `user_email`, `user_password`, `user_status`, `us
 -- Indexes for table `article`
 --
 ALTER TABLE `article`
- ADD PRIMARY KEY (`article_id`), ADD FULLTEXT KEY `idx` (`article_tags`), ADD FULLTEXT KEY `idx1` (`article_name`,`article_content`,`article_des`,`article_tags`);
+ ADD PRIMARY KEY (`article_id`), ADD FULLTEXT KEY `idx1` (`article_name`,`article_content`,`article_des`,`article_tags`);
 
 --
 -- Indexes for table `category`

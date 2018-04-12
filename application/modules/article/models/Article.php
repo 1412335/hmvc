@@ -113,6 +113,17 @@ class Article extends MY_Model
             {
                 $key = $this->prefix_table.'tags';
                 $terms = explode(",", $article[$key]);
+
+//                $q = '';
+//                foreach ($terms as $index => $term)
+//                {
+//                    if($index != 0)
+//                    {
+//                        $q .= ' ';
+//                    }
+//                    $q .= '"'.$term.'"';
+//                }
+
                 $terms = implode(" ", $terms);
                 $where = array(
                     $this->key.'!=' => $article_id,

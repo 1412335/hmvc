@@ -33,23 +33,23 @@
                 <input type="password" class="form-control" name="password" placeholder="Password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="captcha" placeholder="Type captcha">
-                        <div class="input-group-addon">
-                            <i class="fa fa-refresh" onclick="refresh_captcha();"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-group has-feedback">
-                        <div id="captcha">
-                        {$captcha}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {*<div class="row">*}
+                {*<div class="col-xs-6">*}
+                    {*<div class="input-group">*}
+                        {*<input type="text" class="form-control" name="captcha" placeholder="Type captcha">*}
+                        {*<div class="input-group-addon">*}
+                            {*<i class="fa fa-refresh" onclick="refresh_captcha();"></i>*}
+                        {*</div>*}
+                    {*</div>*}
+                {*</div>*}
+                {*<div class="col-xs-6">*}
+                    {*<div class="form-group has-feedback">*}
+                        {*<div id="captcha">*}
+                        {*{$captcha}*}
+                        {*</div>*}
+                    {*</div>*}
+                {*</div>*}
+            {*</div>*}
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
@@ -84,7 +84,7 @@
 </div>
 
 <!-- jQuery 3 -->
-<script src="{$base_url}assets/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{base_url()}assets/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{$base_url}assets/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->

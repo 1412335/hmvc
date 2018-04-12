@@ -35,25 +35,25 @@
                 <input type="password" class="form-control" name="passconf" placeholder="Retype password">
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
             </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="captcha" placeholder="Type captcha">
-                        <div class="input-group-addon">
-                            <i class="fa fa-refresh" onclick="refresh_captcha();"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col -->
-                <div class="col-xs-6">
-                    <div class="form-group has-feedback">
-                        <div id="captcha">
-                            {$captcha}
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col -->
-            </div>
+            {*<div class="row">*}
+                {*<div class="col-xs-6">*}
+                    {*<div class="input-group">*}
+                        {*<input type="text" class="form-control" name="captcha" placeholder="Type captcha">*}
+                        {*<div class="input-group-addon">*}
+                            {*<i class="fa fa-refresh" onclick="refresh_captcha();"></i>*}
+                        {*</div>*}
+                    {*</div>*}
+                {*</div>*}
+                {*<!-- /.col -->*}
+                {*<div class="col-xs-6">*}
+                    {*<div class="form-group has-feedback">*}
+                        {*<div id="captcha">*}
+                            {*{$captcha}*}
+                        {*</div>*}
+                    {*</div>*}
+                {*</div>*}
+                {*<!-- /.col -->*}
+            {*</div>*}
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">

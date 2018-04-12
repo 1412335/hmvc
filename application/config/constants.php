@@ -88,3 +88,13 @@ define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 //cat & article status
 define('PUBLIC_STATUS', 1);
 define('UN_PUBLIC_STATUS', 0);
+
+class ConstantsLoginIncorrect {
+    const login_incorrect_enable = true;
+    // number login incorrect
+    const login_incorrect_num = 10;
+    // time block
+    const login_incorrect_time = 500;
+    // flag show captcha
+    const login_show_captcha = 5;
+}
